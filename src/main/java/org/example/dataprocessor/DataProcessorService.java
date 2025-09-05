@@ -2,7 +2,7 @@ package org.example.dataprocessor;
 
 import org.example.Analyze.AnalysisType;
 import org.example.Output.OutputType;
-import org.example.dataprocessor.enums.CleaningType;
+import org.example.Clean.CleaningType;
 
 import java.util.*;
 import java.util.List;
@@ -20,18 +20,11 @@ import java.util.List;
  */
 public class DataProcessorService {
 
-    private CleaningType clean;
-    private AnalysisType analyze;
-    private OutputType output;
 
     public double process(CleaningType cleaningType, AnalysisType analysisType, OutputType outputType, List<Integer> data) throws Exception {
-        this.clean = cleaningType ;
-        this.analyze = analysisType;
-        this.output = outputType;
 
-
-
-
+        double res = analysisType.analysis(cleaningType.cleaning(data));
+        outputType.output(res);
 
         // TODO: implement using the enums only (no long if/else ladders required,
         // but minimal branching to select behavior by enum is acceptable in this task).
@@ -44,16 +37,9 @@ public class DataProcessorService {
         throw new UnsupportedOperationException("Student must implement process(...)");
     }
 
-    List<Integer> clean(List<Integer> input){
-        return clean(input);
 
-    }
-    double analysis(List<Integer> input){
-        return analyze.analysis(input);
-    }
-    void output( double data){
-        output.output(data);
-    }
+
+
 
 
 }
